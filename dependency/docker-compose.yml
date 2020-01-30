@@ -1,0 +1,16 @@
+version: '3'
+networks:
+  sideupload_net:
+    external: false
+
+services:
+  minio:
+    image: minio/minio
+    command: server /data
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio_good_secretkey
+    ports:
+      - "9000:9000"
+    networks:
+      - sideupload_net
