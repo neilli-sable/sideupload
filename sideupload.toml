@@ -1,8 +1,9 @@
+[sideupload]
 listenPort = 8888
 targetDir = "./samples/storage_object"
 cronWithSecond = "0 0 12 * * *"
 
-[backupStorage]
+[sideupload.backupStorage]
 customEndpoint = "http://localhost:9000"
 region = "us-west-2"
 bucketName = "/sideupload"

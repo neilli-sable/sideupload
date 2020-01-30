@@ -2,6 +2,11 @@ package setting
 
 // Setting ...
 type Setting struct {
+	Sideupload Sideupload
+}
+
+// Sideupload ...
+type Sideupload struct {
 	ListenPort     uint
 	TargetDir      string
 	CronWithSecond string

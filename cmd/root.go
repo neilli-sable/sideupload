@@ -12,7 +12,7 @@ import (
 	"github.com/neilli-sable/sideupload/infrastructure/setting"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-) 
+)
 
 var cfgFile string
 
@@ -53,7 +53,7 @@ func serverStart(opt *setting.Setting) {
 		})
 	})
 
-	err := http.ListenAndServe(fmt.Sprintf(":%d", opt.ListenPort), r)
+	err := http.ListenAndServe(fmt.Sprintf(":%d", opt.Sideupload.ListenPort), r)
 	if err != nil {
 		panic(err.Error())
 	}

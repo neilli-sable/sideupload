@@ -8,7 +8,7 @@ import (
 
 // NewS3Adaptor コンストラクタ
 func NewS3Adaptor(setting *setting.Setting) (*S3Adaptor, error) {
-	s3Service, err := service.NewS3Service(&setting.BackupStorage)
+	s3Service, err := service.NewS3Service(&setting.Sideupload.BackupStorage)
 	if err != nil {
 		return nil, err
 	}

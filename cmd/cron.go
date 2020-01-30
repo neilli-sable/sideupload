@@ -38,13 +38,13 @@ var cronCmd = &cobra.Command{
 func cronStart(opt *setting.Setting) {
 	c := cron.New(cron.WithSeconds())
 
-	c.AddFunc(opt.CronWithSecond, func() {
+	c.AddFunc(opt.Sideupload.CronWithSecond, func() {
 		log.Printf("cron start at %v", time.Now())
 
 		usecase := adaptor.UsecaseFactory(opt)
 		defer usecase.Close()
 
-		targets, err := usecase.GetTargets(opt.TargetDir)
+		targets, err := usecase.GetTargets(opt.Sideupload.TargetDir)
 		if err != nil {
 			panic(err)
 		}
