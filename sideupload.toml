@@ -4,7 +4,7 @@ targetDir = "./samples/storage_object"
 cronWithSecond = "0 0 12 * * *"
 
 [sideupload.backupStorage]
-customEndpoint = "http://localhost:9000"
+customEndpoint = ""
 region = "us-west-2"
 bucketName = "/sideupload"
 prefix = ""
