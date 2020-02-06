@@ -7,6 +7,7 @@ type S3Repository interface {
 	Add(key string, body []byte) error
 	List() ([]*s3.Object, error)
 	Delete(file string) error
+	IsOld(*s3.Object) bool
 }
 
 // ArchiveRepository ...

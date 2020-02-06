@@ -4,8 +4,6 @@ import (
 	"io/ioutil"
 	"path/filepath"
 	"time"
-
-	"github.com/aws/aws-sdk-go/service/s3"
 )
 
 // Usecase ...
@@ -70,18 +68,10 @@ func (usecase *Usecase) DeleteOldArchives() (int, error) {
 
 	count := 0
 	for _, item := range list {
-		if old(item) {
+		if usecase.S3.IsOld(item) {
 			usecase.S3.Delete(*item.Key)
 			count++
 		}
 	}
 	return count, nil
-}
-
-func old(object *s3.Object) bool {
-	deleteDate := time.Now().AddDate(0, 0, -10)
-	if object.LastModified.Before(deleteDate) {
-		return true
-	}
-	return false
 }

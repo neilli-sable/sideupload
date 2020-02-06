@@ -10,6 +10,7 @@ type Sideupload struct {
 	ListenPort     uint
 	TargetDir      string
 	CronWithSecond string
+	StorageDays    int
 	BackupStorage  BackupStorage
 }
 

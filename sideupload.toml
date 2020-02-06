@@ -2,6 +2,7 @@
 listenPort = 8888
 targetDir = "./samples/storage_object"
 cronWithSecond = "0 0 12 * * *"
+storageDays = 10
 
 [sideupload.backupStorage]
 customEndpoint = ""
