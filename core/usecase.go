@@ -3,6 +3,7 @@ package core
 import (
 	"io/ioutil"
 	"path/filepath"
+	"time"
 
 	"github.com/aws/aws-sdk-go/service/s3"
 )
@@ -34,6 +35,7 @@ func (usecase *Usecase) GetTargets(dir string) (paths []string, err error) {
 // CompressTargets ...
 func (usecase *Usecase) CompressTargets(paths []string) (archives map[string][]byte, err error) {
 	archives = map[string][]byte{}
+	timestamp := time.Now().Format("20060102150405")
 
 	for _, p := range paths {
 		body, err := usecase.Archive.Compress(p)
@@ -41,7 +43,7 @@ func (usecase *Usecase) CompressTargets(paths []string) (archives map[string][]b
 			return nil, err
 		}
 
-		key := filepath.Base(p) + ".tar.gz"
+		key := filepath.Base(p) + "_" + timestamp + ".tar.gz"
 
 		archives[key] = body
 	}
