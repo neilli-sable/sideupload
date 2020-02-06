@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 networks:
   sideupload_net:
     external: false
@@ -14,3 +14,22 @@ services:
       - "9000:9000"
     networks:
       - sideupload_net
+
+  sideupload:
+    image: sideupload
+    command: cron
+    environment:
+      SIDEUPLOAD_LISTENPORT: 8888
+      SIDEUPLOAD_TARGETDIR: "/backup"
+      SIDEUPLOAD_CRONWITHSECOND: "*/10 * * * * *"
+      SIDEUPLOAD_BACKUPSTORAGE_CUSTOMENDPOINT: "http://minio:9000"
+      SIDEUPLOAD_BACKUPSTORAGE_REGION: "dummy"
+      SIDEUPLOAD_BACKUPSTORAGE_PREFIX: ""
+      SIDEUPLOAD_BACKUPSTORAGE_BUCKETNAME: "/example"
+      SIDEUPLOAD_BACKUPSTORAGE_ACCESSKEY: minio
+      SIDEUPLOAD_BACKUPSTORAGE_SECRETKEY: minio_good_secretkey
+    networks:
+      - sideupload_net
+    volumes:
+      - "../samples:/backup/samples"
+      - "../samples:/backup/samples1"

@@ -28,19 +28,16 @@ compress:
 	upx $(BUILD_DIR)/bin/$(APPNAME)
 
 serve:
-	$(BUILD_DIR)/bin/$(APPNAME)
+	cd dependency/ && docker-compose up -d
+
+serve-down:
+	cd dependency/ && docker-compose down
 
 cron:
 	$(BUILD_DIR)/bin/$(APPNAME) cron
 
 docker: build compress
 	docker build -t $(APPNAME):latest ./ 
-
-dependency-up:
-	cd dependency/ && docker-compose up -d
-
-dependency-down:
-	cd dependency/ && docker-compose down
 
 test:
 	go test -race -coverprofile=profile.out  ./...
