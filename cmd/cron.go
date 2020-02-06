@@ -61,6 +61,12 @@ func cronStart(opt *setting.Setting) {
 			panic(err)
 		}
 		log.Printf("upload done!!")
+
+		count, err := usecase.DeleteOldArchives()
+		if err != nil {
+			panic(err)
+		}
+		log.Printf("deleted %d files", count)
 	})
 
 	c.Start()

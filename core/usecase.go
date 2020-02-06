@@ -62,19 +62,26 @@ func (usecase *Usecase) UploadArchives(archives map[string][]byte) error {
 }
 
 // DeleteOldArchives ...
-func (usecase *Usecase) DeleteOldArchives() error {
+func (usecase *Usecase) DeleteOldArchives() (int, error) {
 	list, err := usecase.S3.List()
 	if err != nil {
-		return err
+		return 0, err
 	}
+
+	count := 0
 	for _, item := range list {
 		if old(item) {
 			usecase.S3.Delete(*item.Key)
+			count++
 		}
 	}
-	return nil
+	return count, nil
 }
 
 func old(object *s3.Object) bool {
-	return true
+	deleteDate := time.Now().AddDate(0, 0, -10)
+	if object.LastModified.Before(deleteDate) {
+		return true
+	}
+	return false
 }
