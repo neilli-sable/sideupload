@@ -48,16 +48,19 @@ func cronStart(opt *setting.Setting) {
 		if err != nil {
 			panic(err)
 		}
+		log.Printf("get %d targets", len(targets))
 
 		archives, err := usecase.CompressTargets(targets)
 		if err != nil {
 			panic(err)
 		}
+		log.Printf("ready %d archives", len(archives))
 
 		err = usecase.UploadArchives(archives)
 		if err != nil {
 			panic(err)
 		}
+		log.Printf("upload done!!")
 	})
 
 	c.Start()
