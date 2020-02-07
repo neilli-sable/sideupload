@@ -44,7 +44,7 @@ func (h *SideUploadHandler) Clean(w http.ResponseWriter, r *http.Request) {
 	usecase := adaptor.UsecaseFactory(h.Setting)
 	defer usecase.Close()
 
-	err := usecase.DeleteOldArchives()
+	_, err := usecase.DeleteOldArchives()
 	if err != nil {
 		h.Error(w, err)
 		return

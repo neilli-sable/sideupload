@@ -1,3 +1,5 @@
 /build
 /cover.html
 /profile.out
+.vscode
+*_mock*

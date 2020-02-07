@@ -1,6 +1,8 @@
 package adaptor
 
 import (
+	"time"
+
 	"github.com/neilli-sable/sideupload/infrastructure/service"
 	"github.com/neilli-sable/sideupload/infrastructure/setting"
 )
@@ -19,6 +21,11 @@ func NewArchiveAdaptor(setting *setting.Setting) (*ArchiveAdaptor, error) {
 // ArchiveAdaptor 参照操作アダプター
 type ArchiveAdaptor struct {
 	archiveService service.ArchiveService
+}
+
+// Timestamp ...
+func (ad *ArchiveAdaptor) Timestamp() time.Time {
+	return time.Now()
 }
 
 // Compress ...

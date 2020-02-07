@@ -1,6 +1,12 @@
 package core
 
-import "github.com/aws/aws-sdk-go/service/s3"
+import (
+	"time"
+
+	"github.com/aws/aws-sdk-go/service/s3"
+)
+
+//go:generate mockgen -source=./repository.go -destination=mock_core/repository_mock.go -package=mock_core
 
 // S3Repository ...
 type S3Repository interface {
@@ -12,5 +18,6 @@ type S3Repository interface {
 
 // ArchiveRepository ...
 type ArchiveRepository interface {
+	Timestamp() time.Time
 	Compress(path string) (body []byte, err error)
 }

@@ -3,7 +3,6 @@ package core
 import (
 	"io/ioutil"
 	"path/filepath"
-	"time"
 )
 
 // Usecase ...
@@ -33,7 +32,7 @@ func (usecase *Usecase) GetTargets(dir string) (paths []string, err error) {
 // CompressTargets ...
 func (usecase *Usecase) CompressTargets(paths []string) (archives map[string][]byte, err error) {
 	archives = map[string][]byte{}
-	timestamp := time.Now().Format("20060102150405")
+	timestamp := usecase.Archive.Timestamp().Format("20060102150405")
 
 	for _, p := range paths {
 		body, err := usecase.Archive.Compress(p)
